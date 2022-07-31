@@ -1,46 +1,49 @@
 const colorBtn = document.getElementById('color')
-const shadeBtn = document.getElementById('shade')
 const eraseBtn = document.getElementById('erase')
 const clearBtn = document.getElementById('clear')
 const gridCont = document.getElementById('grid')
-let currentMode = ''
-
+let  mode = 'black'
 // creates grid on pageload
 function makeGrid() {
     for (i=0; i<1600; i++) {
         let gridSquare = document.createElement('div')
         gridCont.appendChild(gridSquare)
         gridSquare.classList.add('gridSquare')
-
     }
+    var gridBlock = gridCont.querySelectorAll('div')
+    gridBlock.forEach(gridBlock => gridBlock.addEventListener('mouseover', colorGrid))
 }
 
 
 window.onload = makeGrid()
 //
 
+function colorGrid() {
+    var gridBlock = gridCont.querySelectorAll('div')
+    gridBlock.forEach(gridBlock => {
+        if (mode === 'black') {
+            this.style.backgroundColor = 'black'
+        }
+        else if (mode === 'erase') {
+            this.style.backgroundColor = 'white'
+        }
+        else if (mode === 'clear') {
+                
+        }
+       
+    })
+}
+
 colorBtn.addEventListener('click', () => {
-    currentMode = 'color'
-})
-
-shadeBtn.addEventListener('click', () => {
-    currentMode = 'shade'
-})
-
-eraseBtn.addEventListener('click', () => {
-    currentMode = 'erase'
-})
-
-clearBtn.addEventListener('click', () => {
+    mode = 'black'
     
 })
 
-function play() {
-   document.querySelectorAll('.gridSquare').forEach((item) => {
-       addEventListener('mouseover', (e) => {
-           e.target.style.BackgroundColor = 'black'
-       })
-   })
-}
+eraseBtn.addEventListener('click', () => {
+    mode = 'erase'
+})
 
-window.onload = play()
+clearBtn.addEventListener('click', () => {
+    var gridBlock = gridCont.querySelectorAll('div').forEach(gridBlock => gridBlock.style.backgroundColor = 'white')
+})
+
